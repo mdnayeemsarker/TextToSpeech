@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+android {
+    namespace 'com.github.mdnayeemsarker.texttospeech'
+    compileSdk 34
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
+
+//dependencies {
+//    implementation 'androidx.appcompat:appcompat:1.6.1' // or latest stable version
+//    testImplementation 'junit:junit:4.13.2' // or latest stable version
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // or latest stable version
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // or latest stable version
+//}
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId 'com.github.mdnayeemsarker'
+            artifactId 'TextToSpeech'
+            version '1.0.0'
+
+            pom {
+                name = "TextToSpeech"
+                description = "A powerful text to audio library"
+                url = "https://github.com/mdnayeemsarker/texttospeech"
+                licenses {
+                    license {
+                        name = "Apache-2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "mdnayeemsarker"
+                        name = "MD NAYEEM SARKER"
+                        email = "dev.ab.nayeem@gmail.com"
+                    }
+                }
+            }
+        }
+    }
+}

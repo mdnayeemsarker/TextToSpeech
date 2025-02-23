@@ -37,8 +37,8 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "Language not supported");
             } else {
-                textToSpeech.setSpeechRate(Config.getVoiceSpeed());
-                setVoice(Config.getVoiceGender());
+                textToSpeech.setSpeechRate(Base.getVoiceSpeed());
+                setVoice(Base.getVoiceGender());
                 isInitialized = true;
                 processQueue();
             }
@@ -90,7 +90,7 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
                 textToSpeech.setVoice(selectedVoice);
                 Log.e("TTSG", "Requested voice gender found");
             } else {
-                Log.e("TTSG", "Requested voice gender not found, using default." + Config.getVoiceGender());
+                Log.e("TTSG", "Requested voice gender not found, using default." + Base.getVoiceGender());
             }
         }
     }

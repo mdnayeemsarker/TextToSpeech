@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Config.setVoiceSpeed("slow");
-//        Config.setVoiceGender("male");
+        Base.setVoiceSpeed("slow");
+//        Base.setVoiceGender("male");
         ttsHelper = TextToSpeechHelper.getInstance(this);
     }
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         playText("Hello World");
     }
     public void nayeem(View view) {
-        Log.d("voice", Config.getVoiceGender());
+        Log.d("voice", Base.getVoiceGender());
         playText("MD NAYEEM SARKER");
     }
 }

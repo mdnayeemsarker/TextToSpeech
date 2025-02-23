@@ -1,6 +1,6 @@
 package com.abmn.texttospeech;
 
-public class Config {
+public class Base {
 
     private static float voiceSpeed = 1.0f;
     private static String voiceGender = "female";

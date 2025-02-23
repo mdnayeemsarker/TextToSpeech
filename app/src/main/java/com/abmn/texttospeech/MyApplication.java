@@ -7,7 +7,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Config.setVoiceSpeed("slow");
-        Config.setVoiceGender("male");
+        Base.setVoiceSpeed("slow");
+        Base.setVoiceGender("male");
     }
 }

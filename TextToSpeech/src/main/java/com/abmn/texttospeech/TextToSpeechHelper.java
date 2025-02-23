@@ -2,16 +2,18 @@ package com.abmn.texttospeech;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
 
     private static TextToSpeechHelper instance;
-    private TextToSpeech textToSpeech;
+    private final TextToSpeech textToSpeech;
     private boolean isInitialized = false;
     private final List<String> speakQueue = new ArrayList<>(); // Queue for requests during initialization
 
@@ -35,8 +37,10 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "Language not supported");
             } else {
+                textToSpeech.setSpeechRate(Config.getVoiceSpeed());
+                setVoice(Config.getVoiceGender());
                 isInitialized = true;
-                processQueue();  // Process queued requests once initialized
+                processQueue();
             }
         } else {
             Log.e("TTS", "Initialization failed");
@@ -48,7 +52,7 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
             textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
             Log.e("TTS", "TextToSpeech not initialized; queuing text");
-            speakQueue.add(text);  // Queue requests if not yet initialized
+            speakQueue.add(text);
         }
     }
 
@@ -65,6 +69,30 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
             textToSpeech.shutdown();
         }
         instance = null;
+    }
+    private void setVoice(String gender) {
+        if (textToSpeech != null) {
+            Set<Voice> voices = textToSpeech.getVoices();
+            Voice selectedVoice = null;
+
+            for (Voice voice : voices) {
+                String voiceName = voice.getName().toLowerCase();
+                if (gender.equalsIgnoreCase("male") && (voiceName.contains("male") || voiceName.contains("man"))) {
+                    selectedVoice = voice;
+                    break;
+                } else if (gender.equalsIgnoreCase("female") && (voiceName.contains("female") || voiceName.contains("woman"))) {
+                    selectedVoice = voice;
+                    break;
+                }
+            }
+
+            if (selectedVoice != null) {
+                textToSpeech.setVoice(selectedVoice);
+                Log.e("TTSG", "Requested voice gender found");
+            } else {
+                Log.e("TTSG", "Requested voice gender not found, using default." + Config.getVoiceGender());
+            }
+        }
     }
 
 }

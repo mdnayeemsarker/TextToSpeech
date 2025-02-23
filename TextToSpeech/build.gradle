@@ -8,6 +8,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
+        //noinspection OldTargetApi
         targetSdkVersion 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,18 +34,12 @@ dependencies {
     androidTestImplementation libs.espresso.core
 }
 
-//dependencies {
-//    implementation 'androidx.appcompat:appcompat:1.6.1' // or latest stable version
-//    testImplementation 'junit:junit:4.13.2' // or latest stable version
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // or latest stable version
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // or latest stable version
-//}
 publishing {
     publications {
         release(MavenPublication) {
             groupId 'com.github.mdnayeemsarker'
             artifactId 'TextToSpeech'
-            version '1.0.0'
+            version '1.0.1'
 
             pom {
                 name = "TextToSpeech"

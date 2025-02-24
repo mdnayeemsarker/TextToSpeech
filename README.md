@@ -20,25 +20,11 @@ Add Dependency Just go to your build.gradle Module:
 //Add the dependency
 dependencies {
 ```bash
-	implementation 'com.github.mdnayeemsarker:TextToSpeech:1.0.2'
+	implementation 'com.github.mdnayeemsarker:TextToSpeech:1.0.3'
 ```
 }
 
 How to use:
-
-make an MyApplication it extends Application and set this in your manifest
-```bash
-
-    public void onCreate() {
-        super.onCreate();
-        Base.setVoiceSpeed("slow");
-    }
-
-    <application
-        android:name=".MyApplication"
-    >
-    </application>
-```
 
 // before onCreate
 
@@ -47,7 +33,7 @@ make an MyApplication it extends Application and set this in your manifest
     private TextToSpeechHelper ttsHelper; //before oncreate
     //if you want to change the speed in activity then initialize this befole initialize ttsHelper
     Base.setVoiceSpeed("slow");//you can controll this way to text to speech speed "slower", "slow", "normal", "fast", "faster"
-    ttsHelper = TextToSpeechHelper.getInstance(this); //in oncreate
+    ttsHelper = new TextToSpeechHelper(this, "slower"); //in oncreate, you can controll this way to text to speech speed "slower", "slow", "normal", "fast", "faster"
     
     ttsHelper.speak("Hello World"); //use look like this
 ```

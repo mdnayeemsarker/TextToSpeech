@@ -1,7 +1,6 @@
 package com.abmn.texttospeech;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -24,9 +23,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Base.setVoiceSpeed("slow");
-//        Base.setVoiceGender("male");
-        ttsHelper = TextToSpeechHelper.getInstance(this);
     }
 
     private void playText(String text) {
@@ -42,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void hello(View view) {
+        ttsHelper = new TextToSpeechHelper(this, "slower");
         playText("Hello World");
     }
     public void nayeem(View view) {
-        Log.d("voice", Base.getVoiceGender());
+        ttsHelper = new TextToSpeechHelper(this, "faster");
         playText("MD NAYEEM SARKER");
     }
 }

@@ -15,8 +15,7 @@ public class TextToSpeechHelper implements TextToSpeech.OnInitListener {
     private boolean isInitialized = false;
     private final List<String> speakQueue = new ArrayList<>();
 
-    // Private constructor
-    TextToSpeechHelper(Context context, String speed)  {
+    public TextToSpeechHelper(Context context, String speed)  {
         textToSpeech = new TextToSpeech(context, this);
         voiceSpeed = speed;
     }
